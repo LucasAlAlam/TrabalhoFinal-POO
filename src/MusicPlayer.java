@@ -15,9 +15,6 @@ public class MusicPlayer extends PlaybackListener {
     private MusicPlayerGUI musicPlayerGUI;
 
     private Song currentSong;
-    public Song getCurrentSong(){
-        return currentSong;
-    }
 
     private ArrayList<Song> playlist;
 
@@ -125,6 +122,10 @@ public class MusicPlayer extends PlaybackListener {
         playCurrentSong();
     }
 
+    public Song getCurrentSong(){
+        return currentSong;
+    }
+    
     public void prevSong(){
         if(playlist == null) return;
         if(currentPlaylistIndex - 1 < 0) return;
