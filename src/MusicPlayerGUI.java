@@ -146,29 +146,29 @@ public class MusicPlayerGUI extends JFrame {
 
         // add button to add songs to the playlist
         JButton addSongButton = new JButton("Add Song");
-        addSongButton.setBounds(0, 480, getWidth() - 10, 30);
+        addSongButton.setBounds(0, 610, getWidth() - 10, 30);
         addSongButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = jFileChooser.showOpenDialog(MusicPlayerGUI.this);
-                File selectedFile = jFileChooser.getSelectedFile();
+            int result = jFileChooser.showOpenDialog(MusicPlayerGUI.this);
+            File selectedFile = jFileChooser.getSelectedFile();
 
-                if(result == JFileChooser.APPROVE_OPTION && selectedFile != null){
-                    // create a song obj based on selected file
-                    Song song = new Song(selectedFile.getPath());
+            if(result == JFileChooser.APPROVE_OPTION && selectedFile != null){
+                // create a song obj based on selected file
+                Song song = new Song(selectedFile.getPath());
 
-                    // add song to the playlist
-                    musicPlayer.addSongToPlaylist(selectedFile);
+                // add song to the playlist
+                musicPlayer.addSongToPlaylist(selectedFile);
 
-                    // update the playlist panel
-                    musicPlayer.updatePlaylistPanel(playlistPanel);
-                }
+                // update the playlist panel
+                musicPlayer.updatePlaylistPanel(playlistPanel);
+            }
             }
         });
         add(addSongButton);
-    }
+        }
 
-    private void addToolbar(){
+        private void addToolbar(){
         JToolBar toolBar = new JToolBar();
         toolBar.setBounds(0, 0, getWidth(), 20);
 
