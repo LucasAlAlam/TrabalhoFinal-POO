@@ -120,6 +120,52 @@ public class MusicPlayerGUI extends JFrame {
 
         // playback buttons (i.e. previous, play, next)
         addPlaybackBtns();
+
+        addPlaylistViewer();
+    }
+
+    private void addPlaylistViewer(){
+        // create a scroll pane
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(0, 520, getWidth() - 10, 80);
+        scrollPane.setBackground(null);
+
+        // create a panel to hold the playlist
+        JPanel playlistPanel = new JPanel();
+        playlistPanel.setLayout(new BoxLayout(playlistPanel, BoxLayout.Y_AXIS));
+        playlistPanel.setBackground(null);
+
+        // add the panel to the scroll pane
+        scrollPane.setViewportView(playlistPanel);
+
+        // add the scroll pane to the frame
+        add(scrollPane);
+
+        // add the playlist to the music player
+        musicPlayer.setPlaylistPanel(playlistPanel);
+
+        // add button to add songs to the playlist
+        JButton addSongButton = new JButton("Add Song");
+        addSongButton.setBounds(0, 480, getWidth() - 10, 30);
+        addSongButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int result = jFileChooser.showOpenDialog(MusicPlayerGUI.this);
+                File selectedFile = jFileChooser.getSelectedFile();
+
+                if(result == JFileChooser.APPROVE_OPTION && selectedFile != null){
+                    // create a song obj based on selected file
+                    Song song = new Song(selectedFile.getPath());
+
+                    // add song to the playlist
+                    musicPlayer.addSongToPlaylist(selectedFile);
+
+                    // update the playlist panel
+                    musicPlayer.updatePlaylistPanel(playlistPanel);
+                }
+            }
+        });
+        add(addSongButton);
     }
 
     private void addToolbar(){
@@ -351,12 +397,3 @@ public class MusicPlayerGUI extends JFrame {
         return null;
     }
 }
-
-
-
-
-
-
-
-
-
